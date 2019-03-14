@@ -6,15 +6,16 @@
 
 
 
-module segments (input logic [11:0] tLED, 
-				input logic [15:0] cLED,
-				input logic [1:0] digit,
-				output logic [3:0] LEDt, LEDc,
-				output logic [3:0] ct_1, ct_2,
-				input logic clk, reset_n);
+module segments (input logic [11:0] tLED, tLED_temp, 
+					  input logic [11:0] cLED,
+					  input logic [1:0] digit,
+					  input logic [3:0] num,
+					  output logic [3:0] LEDt, LEDc,
+					  output logic [3:0] ct_1, ct_2,
+					  input logic clk, reset_n, stop);
 				
 		logic [3:0] t_digit2, t_digit1, t_digit0;
-		logic [3:0] c_digit3, c_digit2, c_digit1, c_digit0;
+		logic [3:0] c_digit2, c_digit1, c_digit0;
 		
 		
 				
@@ -24,26 +25,25 @@ module segments (input logic [11:0] tLED,
 		t_digit1 = tLED[7:4];
 		t_digit0 = tLED[3:0];
 		
-		c_digit3 = cLED[15:12];
 		c_digit2 = cLED[11:8];
 		c_digit1 = cLED[7:4];
 		c_digit0 = cLED[3:0];
 		
 		//set the digit for the time display
 		case (digit)
-			0 : LEDt = t_digit0;	//extracted first digit
-			1 : LEDt = t_digit1;	//extracted second digit
-			2 : LEDt = t_digit2;	//extracted thrid digit
+			0 : LEDt = stop ? tLED_temp[3:0] : t_digit0;	//extracted first digit
+			1 : LEDt = stop ? tLED_temp[7:4] : t_digit1;	//extracted second digit
+			2 : LEDt = stop ? tLED_temp[11:8] : t_digit2;	//extracted thrid digit
 			3 : LEDt = 4'hA;  		//"t"
 			default : LEDt = 4'hF; // F to pay respects
 		endcase
 			
 		//set the digit for the Temperature display
 		case (digit)
-			0 : LEDc = c_digit0;	//extracted first digit
-			1 : LEDc = c_digit1;	//extracted second digit
-			2 : LEDc = c_digit2;	//extracted thrid digit
-			3 : LEDc = c_digit3;  	//extracted fourth digit
+			0 : LEDc = c_digit0; //extracted first digit
+			1 : LEDc = c_digit1; //extracted second digit
+			2 : LEDc = c_digit2; //extracted thrid digit
+			3 : LEDc = 4'hC; //"C"
 			default : LEDc = 4'hF; // F to pay respects
 		endcase
 		

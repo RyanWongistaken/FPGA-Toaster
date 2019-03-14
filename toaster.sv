@@ -2,24 +2,35 @@
 // Ed.Casas 2017-1-9
 
 module toaster(input logic CLOCK_50,     // 50 MHz clock
+					input logic [3:0] kpr,
+					output logic pwm,
+					output logic [3:0] kpc,
                output logic [7:0] ledst, ledsc, // 7-seg LED cathodes
-               output logic [3:0] ct_1, ct_2) ; // digit enable
+               output logic [3:0] ct_1, ct_2); // digit enable
 
    logic [1:0] digit;
    logic clk;
 	logic stop;
 	logic start;
 	logic write;
-	logic pwm;
+	logic write_ack;
+	logic [9:0] Time;
+	logic [7:0] DC;
 	logic [11:0] tLED;
-	logic [15:0] cLED;
+	logic [11:0] tLED_temp;
+	logic [11:0] cLED;
 	logic [3:0] LEDt;
 	logic [3:0] LEDc;
 	logic reset_n = 1;
+	logic kphit;
+	logic [3:0] num;
 	
-   timer timer_0 (.*) ;
-   segments segments_0  (.*) ;
-   decode7 decode7_0 (.*) ;
+   timer timer_0 (.*);
+   segments segments_0  (.*);
+   decode7 decode7_0 (.*);
+	colseq colseq_0 (.*);
+	kpdecode kpdecode_0 (.*);
+	kpcontrol kpcontrol_0 (.*);
 	
 	always_ff @(posedge clk) 
      digit <= digit + 1'b1 ;
