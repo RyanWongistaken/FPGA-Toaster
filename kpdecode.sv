@@ -1,6 +1,9 @@
-// kpdecode.sv - ELEX 7660 2019 
-// module to take in the row and column data for a keypad and decode what hex digit was pressed
-// Bhavik.Maisuria 2019-1-18
+// kpdecode.sv - ELEX 7660 Design Project
+// 
+// 
+//
+// Ryan Wong & Bhavik Maisuria
+// 3-16-2019 (Last edited)
 
 module kpdecode (input logic [3:0] kpr, input logic [3:0] kpc,
 				output logic kphit, output logic [3:0] num); 

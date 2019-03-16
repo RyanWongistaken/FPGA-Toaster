@@ -1,6 +1,7 @@
 // decode7.sv - ELEX 7660 Design Project
 // Code that turns on the necessary LEDS in the 7-segement
 // Ryan Wong & Bhavik Maisuria
+// 3-16-2019 (Last edited)
 
 module decode7 (input logic [3:0] LEDt, LEDc,
 			output logic [7:0] ledst, ledsc);

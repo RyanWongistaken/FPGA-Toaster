@@ -1,5 +1,10 @@
-// lab1.sv - ELEX 7660 201710 lab1 top-level module
-// Ed.Casas 2017-1-9
+// toaster.sv - ELEX 7660 Design Project
+// 
+// 
+//
+// Ryan Wong & Bhavik Maisuria
+// 3-16-2019 (Last edited)
+
 
 module toaster(input logic CLOCK_50,     // 50 MHz clock
 					input logic [3:0] kpr,

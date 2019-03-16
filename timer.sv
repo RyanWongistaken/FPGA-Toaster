@@ -1,3 +1,11 @@
+// timer.sv - ELEX 7660 Design Project
+// 
+// 
+//
+// Ryan Wong & Bhavik Maisuria
+// 3-16-2019 (Last edited)
+
+
 module timer (input logic clk, stop, start, write, input logic [9:0] Time, input logic [7:0] DC,
 				  output logic [11:0] tLED, output logic pwm, write_ack);
 

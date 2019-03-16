@@ -1,3 +1,11 @@
+// kpcontrol.sv - ELEX 7660 Design Project
+// 
+// 
+//
+// Ryan Wong & Bhavik Maisuria
+// 3-16-2019 (Last edited)
+
+
 module kpcontrol (input logic [11:0] tLED, input logic [3:0] num, input logic kphit, clk, write_ack,
 						output logic start, stop, write, output logic [9:0] Time, output logic [7:0] DC,
 						output logic [11:0] tLED_temp, cLED);

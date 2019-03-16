@@ -4,8 +4,6 @@
 // cLED ---> LEDc Temperature displays (Celsius)
 // Ryan Wong & Bhavik Maisuria
 
-
-
 module segments (input logic [11:0] tLED, tLED_temp, 
 					  input logic [11:0] cLED,
 					  input logic [1:0] digit,

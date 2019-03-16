@@ -1,6 +1,7 @@
-// colseq.sv - ELEX 7660 2019 
-// module to sequence one column low at a time with a clk input and pause if a button is pressed with an active low reset
-// Bhavik.Maisuria 2019-1-24
+// colseq.sv - ELEX 7660 Design Project
+// Determins the column of the button pressed
+// Ryan Wong & Bhavik Maisuria
+// 3-16-2019 (Last edited)
 
 module colseq (input logic [3:0] kpr, output logic [3:0] kpc,
 				input logic clk, reset_n); 
