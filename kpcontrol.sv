@@ -1,7 +1,6 @@
 // kpcontrol.sv - ELEX 7660 Design Project
-// 
-// 
-//
+// Interface with keypad by recieving values from kpdecode.sv 
+// and then executing the appropriate code based on the mode
 // Ryan Wong & Bhavik Maisuria
 // 3-16-2019 (Last edited)
 
@@ -10,15 +9,20 @@ module kpcontrol (input logic [11:0] tLED, input logic [3:0] num, input logic kp
 						output logic start, stop, write, output logic [9:0] Time, output logic [7:0] DC,
 						output logic [11:0] tLED_temp, cLED);
 						
-						logic [9:0] debounce;
-						logic mode;
+						logic [9:0] debounce; 
+						logic mode; //determines the wheather the keypad is used for temperature or time
 						
 						always_comb begin
+							// Converts the value stored in the temporary register time in seconds
 							Time = tLED_temp[11:8] * 60 + tLED_temp[7:4] * 10 + tLED_temp[3:0];
+							
+							//PWM Temperature control: the value entered is set as the new duty cycle
 							DC = cLED[11:8] * 100 + cLED[7:4] * cLED[3:0];
 						end
 						
 						always_ff @(posedge clk) begin
+							//checks if the user has decided to edit the values of the toaster
+							// A corressponds to the "stop" button on the keypad
 							if(num < 'hA && debounce == 0 && stop) begin
 								if(mode)
 									tLED_temp <= {tLED_temp[7:0], num}; 
@@ -30,6 +34,7 @@ module kpcontrol (input logic [11:0] tLED, input logic [3:0] num, input logic kp
 								mode <= mode;
 								debounce <= 1023;
 							end
+							//stops the timer and the toasting
 							else if(num == 'hA && debounce == 0) begin 
 								start <= 0;
 								stop <= 1;
@@ -38,6 +43,7 @@ module kpcontrol (input logic [11:0] tLED, input logic [3:0] num, input logic kp
 								mode <= mode;
 								debounce <= 1023;
 							end
+							//Starts the timer and the toasting 
 							else if(num == 'hB && debounce == 0) begin
 								start <= 1;
 								stop <= 0;
@@ -47,8 +53,10 @@ module kpcontrol (input logic [11:0] tLED, input logic [3:0] num, input logic kp
 								mode <= mode;
 								debounce <= 1023;
 							end
+							//Toggel between temperature and time mode
 							else if(num == 'hC && debounce == 0) 
 								mode <= ~mode;
+							//do nothing if nothing is pressed
 							else begin
 								start <= start;
 								stop <= stop;
@@ -56,10 +64,10 @@ module kpcontrol (input logic [11:0] tLED, input logic [3:0] num, input logic kp
 								cLED <= cLED;
 								mode <= mode;
 							end
-							
+							// confirms the value is recieved by the other module 
 							if(write_ack)
 								write <= 0;
-							
+							//does the debouncing by counting down
 							if(debounce > 0)
 								debounce <= debounce - 1;
 								

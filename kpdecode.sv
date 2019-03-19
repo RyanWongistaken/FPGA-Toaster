@@ -1,7 +1,6 @@
 // kpdecode.sv - ELEX 7660 Design Project
-// 
-// 
-//
+// Determines the value pressed by colseq.sv and then determines the hex value
+// and then passes it on to kpcontrol. 
 // Ryan Wong & Bhavik Maisuria
 // 3-16-2019 (Last edited)
 
@@ -35,6 +34,7 @@ module kpdecode (input logic [3:0] kpr, input logic [3:0] kpc,
 					endcase
 					
 			'b1110 : case(kpr)
+						
 						'b0111 : begin kphit = 1; num = 'hA; end
 						'b1011 : begin kphit = 1; num = 'hB; end
 						'b1101 : begin kphit = 1; num = 'hC; end

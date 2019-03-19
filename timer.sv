@@ -1,7 +1,6 @@
 // timer.sv - ELEX 7660 Design Project
-// 
-// 
-//
+// Performs the countdown for the timer when activated 
+// as well as output the desired PWM given duty cycle
 // Ryan Wong & Bhavik Maisuria
 // 3-16-2019 (Last edited)
 
@@ -15,19 +14,25 @@ module timer (input logic clk, stop, start, write, input logic [9:0] Time, input
 	logic [3:0] tens;
 	logic [3:0] ones;
 	
+	// unit conversions 
 	always_comb begin
 		minutes = tim / 60;
 		tens = (tim % 60) / 10;
 		ones = (tim % 60) % 10;
 		tLED =  {minutes, tens, ones};
+		//setting the PWM from the duty cycle
 		pwm = tim && start && ctr < 10 * DC;
 	end
-		
+
 	always_ff @(posedge clk) begin
+		// recives time from the keypad module 
+		// and sends an acknoweldge at the same time
 		if(write) begin
 			tim <= Time;
 			write_ack <= 1;
 		end
+		
+		//counts down one second at a time 
 		else if(ctr >= 2000 && start) begin 
 			ctr <= 0;
 			write_ack <= 0;
