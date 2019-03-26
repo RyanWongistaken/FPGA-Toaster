@@ -6,11 +6,11 @@
 
 
 module kpcontrol (input logic [11:0] tLED, input logic [3:0] num, input logic kphit, clk, write_ack,
-						output logic start, stop, write, output logic [9:0] Time, output logic [7:0] DC,
+						output logic start, stop, write, mode, output logic [9:0] Time, output logic [7:0] DC,
 						output logic [11:0] tLED_temp, cLED);
 						
 						logic [9:0] debounce; 
-						logic mode; //determines the wheather the keypad is used for temperature or time
+						//logic mode; //determines the wheather the keypad is used for temperature or time
 						
 						always_comb begin
 							// Converts the value stored in the temporary register time in seconds

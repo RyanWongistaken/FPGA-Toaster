@@ -7,8 +7,9 @@
 
 
 module toaster(input logic CLOCK_50,     // 50 MHz clock
+					(* altera_attribute = "-name WEAK_PULL_UP_RESISTOR ON" *)
 					input logic [3:0] kpr,
-					output logic pwm,
+					output logic pwm, mode,
 					output logic [3:0] kpc,
                output logic [7:0] ledst, ledsc, // 7-seg LED cathodes
                output logic [3:0] ct_1, ct_2); // digit enable
@@ -30,7 +31,7 @@ module toaster(input logic CLOCK_50,     // 50 MHz clock
 	logic kphit;
 	logic [3:0] num;
 	
-   timer timer_0 (.*);
+   timer_pwm timer_0 (.*);
    segments segments_0  (.*);
    decode7 decode7_0 (.*);
 	colseq colseq_0 (.*);
