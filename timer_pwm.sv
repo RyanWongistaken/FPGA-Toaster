@@ -1,4 +1,4 @@
-// timer.sv - ELEX 7660 Design Project
+// timer_pwm.sv - ELEX 7660 Design Project
 // Performs the countdown for the timer when activated 
 // as well as output the desired PWM given duty cycle
 // Ryan Wong & Bhavik Maisuria
