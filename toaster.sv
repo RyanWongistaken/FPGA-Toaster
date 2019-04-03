@@ -9,7 +9,8 @@
 module toaster(input logic CLOCK_50,     // 50 MHz clock
 					(* altera_attribute = "-name WEAK_PULL_UP_RESISTOR ON" *)
 					input logic [3:0] kpr,
-					output logic pwm, mode,
+					output logic pwm, 
+					output logic mode,
 					output logic [3:0] kpc,
                output logic [7:0] ledst, ledsc, // 7-seg LED cathodes
                output logic [3:0] ct_1, ct_2); // digit enable
@@ -39,7 +40,7 @@ module toaster(input logic CLOCK_50,     // 50 MHz clock
 	kpcontrol kpcontrol_0 (.*);
 	
 	always_ff @(posedge clk) 
-     digit <= digit + 1'b1 ;
+     digit <= digit + 1;
    
    
    pll pll0 ( .inclk0(CLOCK_50), .c0(clk) ) ;

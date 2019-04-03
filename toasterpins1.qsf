@@ -1,7 +1,7 @@
 
 set_location_assignment PIN_R8 -to CLOCK_50
-set_location_assignment PIN_A15 -to pwm
-# set_location_assignment PIN_A15 -to LED[0]
+#set_location_assignment PIN_A15 -to pwm
+set_location_assignment PIN_A15 -to LED[0]
 set_location_assignment PIN_A13 -to LED[1]
 set_location_assignment PIN_B13 -to LED[2]
 set_location_assignment PIN_A11 -to LED[3]
@@ -138,7 +138,7 @@ set_location_assignment PIN_J16 -to GPIO_1[30]
 set_location_assignment PIN_J13 -to GPIO_1[32]
 
 set_location_assignment PIN_F13 -to LED[0]
-#set_location_assignment PIN_F13 -to pwm
+set_location_assignment PIN_F13 -to pwm
 set_location_assignment PIN_A2 -to qspb
 set_location_assignment PIN_A8 -to qsa
 set_location_assignment PIN_B8 -to qsb
